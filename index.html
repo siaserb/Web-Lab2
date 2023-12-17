@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лаб2</title>
+  <link rel = "stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="center-container">
+    <form action="#" method="post" class="validation-form" onsubmit="return validateForm()">
+        <label for="pib">ПІБ:</label>
+        <input type="text" id="pib" name="pib" required>
+        <small>Введіть ПІБ, наприклад, Прізвище І.І.</small>
+
+        <label for="variant">Варіант:</label>
+        <input type="text" id="variant" name="variant" required>
+        <small>Введіть варіант, наприклад, 01</small>
+
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" oninput="formatPhoneNumber()" required>
+        <small>Введіть телефон, наприклад, 0975435453</small>
+
+        <label for="faculty">Факультет:</label>
+        <input type="text" id="faculty" name="faculty" required>
+        <small>Введіть факультет, наприклад, ФІОТ</small>
+
+        <label for="address">Адреса:</label>
+        <input type="text" id="address" name="address" oninput="addCityPrefix()" required>
+        <small>Введіть назву міста</small>
+
+        <button type="submit">Відправити</button>
+    </form>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

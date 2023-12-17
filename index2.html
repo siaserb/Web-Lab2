@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таблиця зміни кольорів</title>
+  <link rel = "stylesheet" type="text/css" href="style2.css">
+</head>
+<body>
+  <div id="colorPanel">
+    <input type="color" id="colorPicker">
+  </div>
+  
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td>20</td>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td>26</td>
+        <td>27</td>
+        <td>28</td>
+        <td>29</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>31</td>
+        <td>32</td>
+        <td>33</td>
+        <td>34</td>
+        <td>35</td>
+        <td>36</td>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const table = document.getElementById("myTable");
+    const colorPicker = document.getElementById("colorPicker");
+
+    table.addEventListener("mouseover", function(event) {
+        const targetCell = event.target;
+        if (targetCell.tagName === "TD") {
+            if (parseInt(targetCell.innerText) === 7) {
+            const randomColor = getRandomColor();
+            targetCell.style.backgroundColor = randomColor;
+            targetCell.style.color = getContrastColor(randomColor);
+            }
+        }
+    });
+
+    table.addEventListener("click", function(event) {
+        const targetCell = event.target;
+        if (targetCell.tagName === "TD") {
+            if (parseInt(targetCell.innerText) === 7) {
+            const currentColor = colorPicker.value;
+            targetCell.style.backgroundColor = currentColor;
+            targetCell.style.color = getContrastColor(currentColor);
+            targetCell.classList.add("selected");
+            }
+        }
+    });
+
+
+    table.addEventListener("dblclick", function(event) {
+        const targetCell = event.target;
+        if (targetCell.tagName === "TD") {
+            let startColoring = false;
+            for (let i = 0; i < table.rows.length; i++) {
+            if (table.rows[i].cells[0] === targetCell || startColoring) {
+                startColoring = true;
+                if (i % 2 === 1) {
+                for (const cell of table.rows[i].cells) {
+                    const randomColor = getRandomColor();
+                    cell.style.backgroundColor = randomColor;
+                    cell.style.color = getContrastColor(randomColor);
+                }
+                }
+            }
+            }
+        }
+    });
+
+
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function getContrastColor(rgbColor) {
+        const rgb = rgbColor.match(/\d+/g);
+        const r = parseInt(rgb[0]);
+        const g = parseInt(rgb[1]);
+        const b = parseInt(rgb[2]);
+        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        return luma < 128 ? 'white' : 'black';
+        }
+    });
+</script>
+
+</body>
+</html>
